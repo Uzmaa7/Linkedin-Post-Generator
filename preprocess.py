@@ -1,5 +1,5 @@
 import json
-# import re
+import re
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
@@ -9,7 +9,7 @@ from llm_helper import llm
 
 def process_posts(raw_file_path,processsed_file_path="data/processed_posts.json"):
     enriched_posts = []
-    with open(raw_file_path, encoding='utf-8') as file:
+    with open(raw_file_path, encoding='utf-8', errors='ignore') as file:
         posts = json.load(file)
 
         for post in posts:
@@ -20,10 +20,10 @@ def process_posts(raw_file_path,processsed_file_path="data/processed_posts.json"
     for epost in enriched_posts:
         print(epost)
 
-#
-# def clean_text(text):
-#     # Remove invalid surrogates
-#     return text.encode("utf-8", "ignore").decode("utf-8", "ignore")
+
+def clean_text(text):
+    # Remove invalid surrogates
+    return text.encode("utf-8", "ignore").decode("utf-8", "ignore")
 
 
 def extract_metadata(post):
