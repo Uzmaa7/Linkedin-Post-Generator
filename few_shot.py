@@ -15,7 +15,13 @@ class FewShotPosts:
             all_tags = self.df['tags'].apply(lambda x:x).sum()
             self.unique_tags = set(list(all_tags))
 
-
+    def categorize_length(self, line_count):
+        if line_count < 5:
+            return  "Short"
+        elif 5 <= line_count <= 10:
+            return "Medium"
+        else:
+            return "Long"
 
 
     def get_tags(self):
@@ -26,5 +32,5 @@ class FewShotPosts:
 
 if __name__ == "__main__":
     fs = FewShotPosts()
-    # posts = fs.get_filtered_posts("Short","English","Job Search")
-    # print(posts)
+    posts = fs.get_filtered_posts("Short","English","Job Search")
+    print(posts)
